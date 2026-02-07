@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upgrade Proposal 💍</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  text-align:center;
+  max-width:420px;
+  transition:0.6s;
+}
+
+h1{color:#ff4b6e;}
+p{color:#444;}
+
+button{
+  padding:12px 22px;
+  margin:12px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.mainBtn{
+  background:#ff4b6e;
+  color:white;
+}
+
+.yes{
+  background:#ff4b6e;
+  color:white;
+}
+
+.no{
+  background:#ddd;
+  position:relative;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.hidden{
+  display:none;
+}
+
+/* Ring animation */
+.ring{
+  font-size:50px;
+  animation:spin 2s linear infinite;
+  margin-top:20px;
+}
+
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  color:#ff4b6e;
+}
+
+@keyframes float{
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-100vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="screen1">
+  <h1>Warning ⚠️</h1>
+  <p>Opening this will change your relationship status forever...</p>
+  <button class="mainBtn" onclick="openProposal()">💖 Open at Your Own Risk</button>
+</div>
+
+<div class="card hidden" id="screen2">
+  <h1>Upgrade Request 💍</h1>
+  <p>Will you upgrade from <b>Boyfriend 1.0</b><br>to <b>Forever Partner 100.0</b>?</p>
+
+  <button class="yes" onclick="accepted()">✔ YES</button>
+  <button class="no" id="noBtn">❌ NO</button>
+</div>
+
+<div class="card hidden" id="screen3">
+  <h1>Forever Locked 💖</h1>
+  <p>
+    Distance may measure miles,<br>
+    but it can’t measure what I feel for you.<br><br>
+
+    I don’t need perfect timing,<br>
+    I just need you.<br><br>
+
+    No rollback. No delete. Only us.<br><br>
+
+    From today… it’s officially forever. 💍
+  </p>
+
+  <div class="ring">💍</div>
+</div>
+
+<script>
+function openProposal(){
+  document.getElementById("screen1").classList.add("hidden");
+  document.getElementById("screen2").classList.remove("hidden");
+}
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", function(){
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random() * window.innerHeight + "px";
+  noBtn.style.left = Math.random() * window.innerWidth + "px";
+});
+
+function accepted(){
+  document.getElementById("screen2").classList.add("hidden");
+  document.getElementById("screen3").classList.remove("hidden");
+  createHearts();
+}
+
+function createHearts(){
+  for(let i=0;i<40;i++){
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (Math.random()*3+3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },6000);
+  }
+}
+</script>
+
+</body>
+</html>
